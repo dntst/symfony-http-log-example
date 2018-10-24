@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HttpLogger
 {
-
     private $request;
     private $response;
     private $writer;
@@ -65,5 +64,4 @@ class HttpLogger
     {
         $this->writer->write($this->httpLog);
     }
-
 }

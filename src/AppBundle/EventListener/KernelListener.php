@@ -10,7 +10,6 @@ use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 
 class KernelListener
 {
-
     private $em;
     private $logger;
 
@@ -30,5 +29,4 @@ class KernelListener
         $httpLogger = new HttpLogger($event->getRequest(), $event->getResponse(), $writer);
         $httpLogger->log();
     }
-
 }

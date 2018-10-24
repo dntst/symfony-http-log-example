@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AppBundle\HttpLogger\Writer;
 
 use AppBundle\Entity\HttpLog;

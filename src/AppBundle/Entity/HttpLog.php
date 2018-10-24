@@ -94,6 +94,5 @@ class HttpLog
     {
         return $this->response;
     }
-
 }
 

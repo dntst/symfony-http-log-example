@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AppBundle\HttpLogger\Writer;
 
 use AppBundle\Entity\HttpLog;
@@ -9,7 +8,6 @@ use Psr\Log\LoggerInterface;
 
 class DoctrineWriter implements WriterInterface
 {
-
     private $em;
     private $logger;
 
