@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Http Logger</a>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Logs</h1>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm" id="logs-table">
+                        <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>IP клиента</th>
+                            <th>URL</th>
+                            <th>Статус</th>
+                            <th>Заголовки запроса</th>
+                            <th>Тело запроса</th>
+                            <th>Заголовки ответа</th>
+                            <th>Тело ответа</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for log in httpLogs %}
+                            <tr>
+                                <td>{{ log.request.date|date('Y-m-d') }} {{ log.request.time|date('H:i:s') }}</td>
+                                <td>{{ log.request.clientIp }}</td>
+                                <td>{{ log.request.url }}</td>
+                                <td>{{ log.response.httpStatus }}</td>
+                                <td>
+                                    {% for header in log.request.headers %}
+                                        <div>{{ header.name }}: {{ header.value }}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% if log.request.body %}
+                                        <a href="#" class="js-show-body">Показать</a>
+                                        <pre style="display: none;">{{ log.request.body }}</pre>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% for header in log.response.headers %}
+                                        <div>{{ header.name }}: {{ header.value }}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% if log.response.body %}
+                                        <a href="#" class="js-show-body">Показать</a>
+                                        <pre style="display: none;">{{ log.response.body }}</pre>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        'use strict';
+        $(function(){
+            $('#logs-table').DataTable({
+                order: [[ 0, 'desc' ]],
+                pageLength: 100
+            });
+
+            $('.js-show-body').on('click', function(e) {
+                e.preventDefault();
+                $(this).hide();
+                $(this).next('pre').show();
+            });
+        });
+    </script>
+{% endblock %}
