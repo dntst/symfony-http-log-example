@@ -2,6 +2,7 @@
 
 namespace AppBundle\EventListener;
 
+use AppBundle\HttpLogger\HttpLogBuilder;
 use AppBundle\HttpLogger\HttpLogger;
 use AppBundle\HttpLogger\Writer\DoctrineWriter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,8 +26,11 @@ class KernelListener
             return;
         }
 
+        $httpLogBuilder = new HttpLogBuilder($event->getRequest(), $event->getResponse());
+        $httpLog = $httpLogBuilder->build();
+
         $writer = new DoctrineWriter($this->em, $this->logger);
-        $httpLogger = new HttpLogger($event->getRequest(), $event->getResponse(), $writer);
+        $httpLogger = new HttpLogger($httpLog, $writer);
         $httpLogger->log();
     }
 }
