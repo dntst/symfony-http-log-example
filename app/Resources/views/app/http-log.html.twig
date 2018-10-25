@@ -17,6 +17,7 @@
                         <tr>
                             <th>Дата</th>
                             <th>IP клиента</th>
+                            <th>Метод</th>
                             <th>URL</th>
                             <th>Статус</th>
                             <th>Заголовки запроса</th>
@@ -30,6 +31,7 @@
                             <tr>
                                 <td>{{ log.request.date|date('Y-m-d') }} {{ log.request.time|date('H:i:s') }}</td>
                                 <td>{{ log.request.clientIp }}</td>
+                                <td>{{ log.request.method }}</td>
                                 <td>{{ log.request.url }}</td>
                                 <td>{{ log.response.httpStatus }}</td>
                                 <td>

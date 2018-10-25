@@ -10,7 +10,7 @@ class StdoutWriter implements WriterInterface
     {
         $message = "[{$httpLog->getRequest()->getDate()->format('Y-m-d')} {$httpLog->getRequest()->getTime()->format('H:i:s')}] ";
         $message .= "{$httpLog->getRequest()->getClientIp()} ";
-        $message .= "[{$httpLog->getResponse()->getHttpStatus()}]: {$httpLog->getRequest()->getUrl()}\n";
+        $message .= "[{$httpLog->getResponse()->getHttpStatus()}]: {$httpLog->getRequest()->getMethod()} {$httpLog->getRequest()->getUrl()}\n";
 
         file_put_contents('php://stdout', $message);
     }

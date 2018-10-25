@@ -25,6 +25,13 @@ class HttpRequestItem
     /**
      * @var string
      *
+     * @ORM\Column(name="method", type="string", length=7)
+     */
+    private $method;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="url", type="string", length=2048)
      */
     private $url;
@@ -84,6 +91,30 @@ class HttpRequestItem
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set method
+     *
+     * @param string $method
+     *
+     * @return HttpRequestItem
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    /**
+     * Get method
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->method;
     }
 
     /**

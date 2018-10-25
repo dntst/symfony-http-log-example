@@ -34,6 +34,7 @@ class HttpLogger
         $httpRequestItem->setClientIp($this->request->getClientIp());
         $httpRequestItem->setDate(new \DateTime());
         $httpRequestItem->setTime(new \DateTime());
+        $httpRequestItem->setMethod($this->request->getMethod());
 
         foreach ($this->request->headers->all() as $key => $value) {
             $httpHeader = new HttpHeader();
